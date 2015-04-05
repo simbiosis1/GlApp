@@ -1,0 +1,138 @@
+.kembangDialogBox {
+	background-color: #fdfdfd;
+	padding: 0px;
+}
+
+.kembangDialogBoxCaption {
+	font: bold 14px 'UbuntuRegular', Arial, sans-serif;
+	color: #f5f5f5;
+	padding: 10px 5px 10px 5px;
+	background: linear-gradient(bottom, #284477 16%, #48639A 50%, #5D7BB2 79%)
+		!important;
+	background: -o-linear-gradient(bottom, #284477 16%, #48639A 50%, #5D7BB2 79%)
+		!important;
+	background: -moz-linear-gradient(bottom, #284477 16%, #48639A 50%, #5D7BB2 79%)
+		!important;
+	background: -webkit-linear-gradient(bottom, #284477 16%, #48639A 50%, #5D7BB2 79%)
+		!important;
+	background: -ms-linear-gradient(bottom, #284477 16%, #48639A 50%, #5D7BB2 79%)
+		!important;
+}
+
+.kembangDialogBoxArea {
+	width: 100%;
+	background-color: #fdfdfd;
+	border-left: solid 2px #ededed;
+	border-right: solid 2px #ededed;
+	padding: 5px;
+	height: 100%;
+}
+
+.kembangDialogBoxButton {
+	width: 100%;
+	background-color: #EDEDED;
+	padding: 10px 5px 10px 5px;
+	vertical-align: right;
+}
+
+.formDescription {
+	font: 16px 'UbuntuRegular', Arial, sans-serif;
+	font-weight: bold;
+	color: #C83B28;
+	padding-bottom: 20px;
+}
+
+.formSubtitle {
+	font: 14px 'UbuntuRegular', Arial, sans-serif;
+	color: #284477;
+	font-weight: bold;
+}
+
+.formSubsubtitle {
+	font: 14px 'UbuntuRegular', Arial, sans-serif;
+	font-weight: bold;
+	color: #284477;
+}
+
+.formLabel {
+	font: 12px 'UbuntuRegular', Arial, sans-serif;
+	font-weight: bold;
+	color: #555555;
+}
+
+.formButton {
+	cursor: pointer;
+	font: 12px 'UbuntuRegular', Arial, sans-serif;
+	font-weight: bold;
+	color: #FFFFFF;
+	padding: 5px 15px 5px 15px;
+	border-style: solid;
+	border-color: #C83B28;
+	border-width: 1px;
+	border-radius: 3px;
+	background: linear-gradient(bottom, #C83B28 2%, #E85B48 51%, #D84B38 76%)
+		!important;
+	background: -o-linear-gradient(bottom, #C83B28 2%, #E85B48 51%, #D84B38 76%)
+		!important;
+	background: -moz-linear-gradient(bottom, #C83B28 2%, #E85B48 51%, #D84B38 76%)
+		!important;
+	background: -webkit-linear-gradient(bottom, #C83B28 2%, #E85B48 51%, #D84B38 76%)
+		!important;
+	background: -ms-linear-gradient(bottom, #C83B28 2%, #E85B48 51%, #D84B38 76%)
+		!important;
+}
+
+.formButton:hover {
+	background-color: #3b7df7;
+}
+
+.formButton::-moz-focus-inner {
+    border:0;
+    padding:0;
+}
+
+.formCombobox {
+	font: 12px 'UbuntuLight', Arial, sans-serif;
+	border-style: solid;
+	border-color: #E3E3E3;
+	border-width: 1px;
+	padding: 1px 3px 1px 3px;
+}
+
+.formText {
+	font: 12px 'UbuntuLight', Arial, sans-serif;
+	border-style: solid;
+	border-color: #E3E3E3;
+	border-width: 1px;
+	padding: 2px 3px 2px 3px;
+}
+
+.formDatebox {
+	font: 12px 'UbuntuLight', Arial, sans-serif;
+	border-style: solid;
+	border-color: #E3E3E3;
+	border-width: 1px;
+	padding: 2px 3px 2px 3px;
+}
+
+.formBox {
+	background-color: #F9F9F9;
+	padding: 5px;
+	border-style: solid;
+	border-color: #E3E3E3;
+	border-width: 1px;
+	margin-bottom: 4px;
+}
+
+.formTableLayout {
+	border-spacing: 2px;
+	height: 100%;
+}
+
+.formTableLayout td {
+	padding: 0px;
+}
+
+.formTextlabel {
+	font: 12px 'UbuntuLight', Arial, sans-serif;
+}

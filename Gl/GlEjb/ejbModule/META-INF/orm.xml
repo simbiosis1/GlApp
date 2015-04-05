@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd">
+	<persistence-unit-metadata>
+		<persistence-unit-defaults>
+			<access>FIELD</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<entity class="org.simbiosis.gl.model.Coa">
+		<table name="ACC_COA">
+		</table>
+		<named-query name="hasChildren">
+			<query>select count(x) from Coa x where x.parent.id=:id</query>
+		</named-query>
+		<named-query name="listCoaForTransaction1">
+			<query>select x.id, x.code, x.description from Coa x where x.protect=0 and x.active=1 and x.level=3 and x.company=:company order by x.code</query>
+		</named-query>
+		<named-query name="listCoaForTransaction2">
+			<query>select x.id, x.code, x.description from Coa x where x.protect=0 and x.active=1 and x.level=3 and x.company=:company and ((x.branch=:branch) or (x.branch=0 and x.excBranch&lt;&gt;:branch)) order by x.code</query>
+		</named-query>
+		<named-query name="listCoaByParent">
+			<query>select x from Coa x where x.active=1 and x.company=:company and x.parent.id=:idParent order by x.code</query>
+		</named-query>
+		<named-query name="listCoaByParent0">
+			<query>select x from Coa x where x.active=1 and x.company=:company and (x.parent.id=:idParent or x.parent is null) order by x.code</query>
+		</named-query>
+		<named-query name="listCoaByType1">
+			<query>select x from Coa x where x.active=1 and x.company=:company and x.level&lt;3 order by x.code</query>
+		</named-query>
+		<named-query name="listCoaByType2">
+			<query>select x from Coa x where x.active=1 and ((x.branch=:branch) or (x.branch=0 and x.excBranch&lt;&gt;:branch)) and x.level=3 order by x.code</query>
+		</named-query>
+		<named-query name="listCoaByStatus">
+			<query>select x from Coa x where x.active=:active and x.company=:company order by x.code</query>
+		</named-query>
+		<named-query name="getCoaByRefId">
+			<query>select x from Coa x where x.company=:company and x.refId=:refId</query>
+		</named-query>
+		<attributes>
+			<id name="id">
+				<column name="COA_ID" />
+				<generated-value strategy="TABLE" generator="gen_acc_coa" />
+				<table-generator name="gen_acc_coa" pk-column-value="gen_acc_coa"
+					allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="refId">
+				<column name="COA_REFID" />
+			</basic>
+			<basic name="code">
+				<column name="COA_CODE" length="30" />
+			</basic>
+			<basic name="description">
+				<column name="COA_DESCRIPTION" length="100" />
+			</basic>
+			<basic name="level">
+				<column name="COA_LEVEL" />
+			</basic>
+			<basic name="prefix">
+				<column name="COA_PREFIX" length="30" />
+			</basic>
+			<basic name="company">
+				<column name="COA_COMPANY" />
+			</basic>
+			<basic name="branch">
+				<column name="COA_BRANCH" />
+			</basic>
+			<basic name="excBranch">
+				<column name="COA_EXCBRANCH" />
+			</basic>
+			<basic name="active">
+				<column name="COA_ACTIVE" />
+			</basic>
+			<basic name="protect">
+				<column name="COA_PROTECT" />
+			</basic>
+			<many-to-one name="parent">
+				<join-column name="PARENT_ID" referenced-column-name="COA_ID"
+					nullable="true" />
+			</many-to-one>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.gl.model.CoaGroup">
+		<table name="ACC_COAGROUP">
+		</table>
+		<named-query name="listCoaGroup">
+			<query>select x from CoaGroup x where x.company=:company and x.group=:group order by x.code</query>
+		</named-query>
+		<named-query name="getCoaGroup">
+			<query>select x from CoaGroup x where x.company=:company and x.code=:code</query>
+		</named-query>
+		<attributes>
+			<id name="id">
+				<column name="CGR_ID" />
+				<generated-value strategy="TABLE" generator="gen_acc_coagroup" />
+				<table-generator name="gen_acc_coagroup"
+					pk-column-value="gen_acc_coagroup" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="code">
+				<column name="CGR_CODE" length="30" />
+			</basic>
+			<basic name="company">
+				<column name="CGR_COMPANY" />
+			</basic>
+			<basic name="group">
+				<column name="CGR_GROUP" />
+			</basic>
+			<basic name="factor">
+				<column name="CGR_FACTOR" />
+			</basic>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.gl.model.GlTrans">
+		<table name="ACC_GLTRANS">
+		</table>
+		<named-query name="listReleasedGLTransByDate1">
+			<query>select x.id,x.date,x.code,x.description from GlTrans x where x.company=:company and x.date&gt;=:beginDate and x.date&lt;=:endDate and x.released=1 and x.posted=0 order by x.code</query>
+		</named-query>
+		<named-query name="listReleasedGLTransByDate2">
+			<query>select x.id,x.date,x.code,x.description from GlTrans x where x.branch=:branch and x.date&gt;=:beginDate and x.date&lt;=:endDate and x.released=1 and x.posted=0 order by x.code</query>
+		</named-query>
+		<named-query name="getMaxGLTransCode">
+			<query>select max(x.code) from GlTrans x where x.company=:company and x.branch=:branch and x.code like :prefixCode</query>
+		</named-query>
+		<named-query name="getGLTransByRefId">
+			<query>select x from GlTrans x where x.company=:company and x.branch=:branch and x.refId=:refId</query>
+		</named-query>
+		<attributes>
+			<id name="id">
+				<column name="TRN_ID" />
+				<generated-value strategy="TABLE" generator="gen_acc_gltrans"/>
+				<table-generator name="gen_acc_gltrans" pk-column-value="gen_acc_gltrans" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="refId">
+				<column name="TRN_REFID" />
+			</basic>
+			<basic name="code">
+				<column name="TRN_CODE" length="30" />
+			</basic>
+			<basic name="description">
+				<column name="TRN_DESCRIPTION" length="400" />
+			</basic>
+			<basic name="date">
+				<column name="TRN_DATE" />
+				<temporal>DATE</temporal>
+			</basic>
+			<basic name="rate">
+				<column name="TRN_RATE" />
+			</basic>
+			<basic name="currencyId">
+				<column name="TRN_CURRENCYID" />
+			</basic>
+			<basic name="type">
+				<column name="TRN_TYPE" />
+			</basic>
+			<basic name="releaseDate">
+				<column name="TRN_RELEASEDATE" />
+				<temporal>DATE</temporal>
+			</basic>
+			<basic name="released">
+				<column name="TRN_RELEASED" />
+			</basic>
+			<basic name="releasedBy">
+				<column name="TRN_RELEASEDBY" />
+			</basic>
+			<basic name="postDate">
+				<column name="TRN_POSTDATE" />
+				<temporal>DATE</temporal>
+			</basic>
+			<basic name="posted">
+				<column name="TRN_POSTED" />
+			</basic>
+			<basic name="postedBy">
+				<column name="TRN_POSTEDBY" />
+			</basic>
+			<basic name="company">
+				<column name="TRN_COMPANY" />
+			</basic>
+			<basic name="branch">
+				<column name="TRN_BRANCH" />
+			</basic>
+			<basic name="user">
+				<column name="TRN_USER" />
+			</basic>
+			<one-to-many name="items" mapped-by="transaction" fetch="EAGER">
+				<order-by></order-by>
+				<cascade>
+					<cascade-all />
+				</cascade>
+			</one-to-many>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.gl.model.GlTransItem">
+		<table name="ACC_GLTRANSITEM">
+		</table>
+		<named-query name="listSumGlTransGroupUntilDate1">
+			<query>select x.coa.id,x.coa.code,x.coa.description,x.direction,sum(x.value) from GlTransItem x where x.transaction.company=:company and x.transaction.date&lt;=:date and x.coa.code like :code group by x.coa.id,x.coa.code,x.coa.description,x.direction order by x.coa.id,x.direction</query>
+		</named-query>
+		<named-query name="listSumGlTransGroupUntilDate2">
+			<query>select x.coa.id,x.coa.code,x.coa.description,x.direction,sum(x.value) from GlTransItem x where x.transaction.branch=:branch and x.transaction.date&lt;=:date and x.coa.code like :code group by x.coa.id,x.coa.code,x.coa.description,x.direction order by x.coa.id,x.direction</query>
+		</named-query>
+		<named-query name="listSumGlTransUntilDate1">
+			<query>select x.coa.id,x.coa.code,x.coa.description,x.direction,sum(x.value) from GlTransItem x where x.transaction.company=:company and x.transaction.date&lt;=:date group by x.coa.id,x.coa.code,x.coa.description,x.direction order by x.coa.id,x.direction</query>
+		</named-query>
+		<named-query name="listSumGlTransUntilDate2">
+			<query>select x.coa.id,x.coa.code,x.coa.description,x.direction,sum(x.value) from GlTransItem x where x.transaction.branch=:branch and x.transaction.date&lt;=:date group by x.coa.id,x.coa.code,x.coa.description,x.direction order by x.coa.id,x.direction</query>
+		</named-query>
+		<named-query name="listSumGlTransGroupRange1">
+			<query>select x.coa.id,x.coa.code,x.coa.description,x.direction,sum(x.value) from GlTransItem x where x.transaction.company=:company and x.transaction.date&gt;=:beginDate and x.transaction.date&lt;=:endDate and x.coa.code like :code group by x.coa.id,x.coa.code,x.coa.description,x.direction order by x.coa.id,x.direction</query>
+		</named-query>
+		<named-query name="listSumGlTransGroupRange2">
+			<query>select x.coa.id,x.coa.code,x.coa.description,x.direction,sum(x.value) from GlTransItem x where x.transaction.branch=:branch and x.transaction.date&gt;=:beginDate and x.transaction.date&lt;=:endDate and x.coa.code like :code group by x.coa.id,x.coa.code,x.coa.description,x.direction order by x.coa.id,x.direction</query>
+		</named-query>
+		<named-query name="listSumGlTransRange1">
+			<query>select x.coa.id,x.coa.code,x.coa.description,x.direction,sum(x.value) from GlTransItem x where x.transaction.company=:company and x.transaction.date&gt;=:beginDate and x.transaction.date&lt;=:endDate group by x.coa.id,x.coa.code,x.coa.description,x.direction order by x.coa.id,x.direction</query>
+		</named-query>
+		<named-query name="listSumGlTransRange2">
+			<query>select x.coa.id,x.coa.code,x.coa.description,x.direction,sum(x.value) from GlTransItem x where x.transaction.branch=:branch and x.transaction.date&gt;=:beginDate and x.transaction.date&lt;=:endDate group by x.coa.id,x.coa.code,x.coa.description,x.direction order by x.coa.id,x.direction</query>
+		</named-query>
+		<named-query name="listGlTransCoaRange1">
+			<query>select x from GlTransItem x where x.transaction.company=:company and x.transaction.date&gt;=:beginDate and x.transaction.date&lt;=:endDate and x.coa.id=:coa order by x.transaction.date</query>
+		</named-query>
+		<named-query name="listGlTransCoaRange2">
+			<query>select x from GlTransItem x where x.transaction.branch=:branch and x.transaction.date&gt;=:beginDate and x.transaction.date&lt;=:endDate and x.coa.id=:coa order by x.transaction.date</query>
+		</named-query>
+		<named-query name="getSumGlTrans">
+			<query>select sum(x.value) from GlTransItem x where x.transaction.id=:id and x.direction=:direction</query>
+		</named-query>
+		<named-query name="getSumGlTransByCoa">
+			<query>select sum(x.value) from GlTransItem x where x.coa.id=:coaId and x.direction=:direction and x.transaction.date&gt;=:beginDate and x.transaction.date&lt;=:endDate</query>
+		</named-query>
+		<named-query name="listGlTransUserRange1">
+			<query>select x from GlTransItem x where x.transaction.company=:company and x.transaction.date&gt;=:beginDate and x.transaction.date&lt;=:endDate and x.transaction.user=:user order by x.transaction.date,x.transaction.id,x.direction</query>
+		</named-query>
+		<named-query name="listGlTransUserRange2">
+			<query>select x from GlTransItem x where x.transaction.branch=:branch and x.transaction.date&gt;=:beginDate and x.transaction.date&lt;=:endDate and x.transaction.user=:user order by x.transaction.date,x.transaction.id,x.direction</query>
+		</named-query>
+		<named-query name="listGlTransUserRange3">
+			<query>select x from GlTransItem x where x.transaction.company=:company and x.transaction.date&gt;=:beginDate and x.transaction.date&lt;=:endDate order by x.transaction.date,x.transaction.id,x.direction</query>
+		</named-query>
+		<named-query name="listGlTransUserRange4">
+			<query>select x from GlTransItem x where x.transaction.branch=:branch and x.transaction.date&gt;=:beginDate and x.transaction.date&lt;=:endDate order by x.transaction.date,x.transaction.id,x.direction</query>
+		</named-query>
+		<attributes>
+			<id name="id">
+				<column name="TRI_ID" />
+				<generated-value strategy="TABLE" generator="gen_acc_gltransitem" />
+				<table-generator name="gen_acc_gltransitem"
+					pk-column-value="gen_acc_gltransitem" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="description">
+				<column name="TRI_DESCRIPTION" length="400" />
+			</basic>
+			<basic name="direction">
+				<column name="TRI_DIRECTION" />
+			</basic>
+			<basic name="value">
+				<column name="TRI_VALUE" />
+			</basic>
+			<basic name="reportId">
+				<column name="TRI_REPORTID" />
+			</basic>
+			<many-to-one name="transaction">
+				<join-column name="TRN_ID" referenced-column-name="TRN_ID" />
+			</many-to-one>
+			<one-to-one name="coa">
+				<join-column name="COA_ID" referenced-column-name="COA_ID" />
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.gl.model.FinancialRef">
+		<table name="ACC_FINANCIALREF">
+		</table>
+		<named-query name="listFinancialRef">
+			<query>select x from FinancialRef x where x.group=:group and x.scheme=:scheme order by x.order</query>
+		</named-query>
+		<attributes>
+			<id name="id">
+				<column name="FRF_ID"/>
+				<generated-value strategy="TABLE" generator="gen_acc_financialref"/>
+				<table-generator name="gen_acc_financialref" pk-column-value="gen_acc_financialref" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="scheme">
+				<column name="FRF_SCHEME"/>
+			</basic>
+			<basic name="group">
+				<column name="FRF_GROUP"/>
+			</basic>
+			<basic name="order">
+				<column name="FRF_ORDER"/>
+			</basic>
+			<basic name="number">
+				<column name="FRF_NUMBER" length="30"/>
+			</basic>
+			<basic name="description">
+				<column name="FRF_DESCRIPTION" length="400"/>
+			</basic>
+			<basic name="code">
+				<column name="FRF_CODE" length="30"/>
+			</basic>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.gl.model.FinancialConvert" access="PROPERTY">
+		<table name="ACC_FINANCIALCONVERT">
+		</table>
+		<named-query name="listFinancialConvert">
+			<query>select x from FinancialConvert x where x.company=:company and x.group=:group and x.code=:code</query>
+		</named-query>
+		<attributes>
+			<id name="id">
+				<column name="FCO_ID"/>
+				<generated-value strategy="TABLE" generator="gen_acc_financialconvert"/>
+				<table-generator name="gen_acc_financialconvert" pk-column-value="gen_acc_financialconvert" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="company">
+				<column name="FCO_COMPANY"/>
+			</basic>
+			<basic name="code">
+				<column name="FCO_CODE" length="30"/>
+			</basic>
+			<basic name="group">
+				<column name="FCO_GROUP"/>
+			</basic>
+			<one-to-one name="coa">
+				<join-column name="COA_ID"/>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.gl.model.CashTrans">
+		<table name="ACC_CASHTRANS">
+		</table>
+		<named-query name="getMaxCashTransCode">
+			<query>select max(x.code) from CashTrans x where x.company=:company and x.branch=:branch and x.code like :prefixCode</query>
+		</named-query>
+		<attributes>
+			<id name="id">
+				<column name="TRC_ID"/>
+				<generated-value strategy="TABLE" generator="gen_acc_cashtrans"/>
+				<table-generator name="gen_acc_cashtrans" pk-column-value="gen_acc_cashtrans" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="code">
+				<column name="TRC_CODE" length="30"/>
+			</basic>
+			<basic name="description">
+				<column length="400" name="TRC_DESCRIPTION"/>
+			</basic>
+			<basic name="date">
+				<column name="TRC_DATE"/>
+				<temporal>DATE</temporal>
+			</basic>
+			<basic name="hasRab">
+				<column name="TRC_HASRAB"/>
+			</basic>
+			<basic name="direction">
+				<column name="TRC_DIRECTION"/>
+			</basic>
+			<basic name="maker">
+				<column name="TRC_MAKER" length="100"/>
+			</basic>
+			<basic name="released">
+				<column name="TRC_RELEASED"/>
+			</basic>
+			<basic name="rate">
+				<column name="TRC_RATE"/>
+			</basic>
+			<basic name="currencyId">
+				<column name="TRC_CURRENCYID"/>
+			</basic>
+			<basic name="glTransId">
+				<column name="TRC_GLTRANSID"/>
+			</basic>
+			<basic name="company">
+				<column name="TRC_COMPANY"/>
+			</basic>
+			<basic name="branch">
+				<column name="TRC_BRANCH"/>
+			</basic>
+			<basic name="releasedBy">
+				<column name="TRC_RELEASEDBY"/>
+			</basic>
+			<basic name="releaseDate">
+				<column name="TRC_RELEASEDATE"/>
+				<temporal>DATE</temporal>
+			</basic>
+			<one-to-many name="items" mapped-by="transaction" fetch="EAGER">
+				<cascade>
+					<cascade-persist />
+					<cascade-merge />
+					<cascade-remove />
+				</cascade>
+			</one-to-many>
+			<one-to-one name="coa">
+				<join-column name="COA_ID" referenced-column-name="COA_ID"/>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.gl.model.CashTransItem">
+		<table name="ACC_CASHTRANSITEM">
+		</table>
+		<attributes>
+			<id name="id">
+				<column name="TCI_ID"/>
+				<generated-value strategy="TABLE" generator="gen_acc_cashtransitem"/>
+				<table-generator name="gen_acc_cashtransitem" pk-column-value="gen_acc_cashtransitem" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="description">
+				<column name="TCI_DESCRIPTION" length="400"/>
+			</basic>
+			<basic name="value">
+				<column name="TCI_VALUE"/>
+			</basic>
+			<many-to-one name="transaction">
+				<join-column name="TRC_ID" referenced-column-name="TRC_ID"/>
+			</many-to-one>
+			<one-to-one name="coa">
+				<join-column name="COA_ID" referenced-column-name="COA_ID"/>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.gl.model.BankTrans">
+		<table name="ACC_BANKTRANS">
+		</table>
+		<named-query name="getMaxBankTransCode">
+			<query>select max(x.code) from BankTrans x where x.company=:company and x.branch=:branch and x.code like :prefixCode</query>
+		</named-query>
+		<attributes>
+			<id name="id">
+				<column name="TRB_ID"/>
+				<generated-value strategy="TABLE" generator="gen_acc_banktrans"/>
+				<table-generator name="gen_acc_banktrans" pk-column-value="gen_acc_banktrans" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="code">
+				<column name="TRB_CODE" length="30"/>
+			</basic>
+			<basic name="description">
+				<column name="TRB_DESCRIPTION" length="400"/>
+			</basic>
+			<basic name="date">
+				<column name="TRB_DATE"/>
+				<temporal>DATE</temporal>
+			</basic>
+			<basic name="mode">
+				<column name="TRB_MODE"/>
+			</basic>
+			<basic name="type">
+				<column name="TRB_TYPE"/>
+			</basic>
+			<basic name="receiver">
+				<column name="TRB_RECEIVER" length="100"/>
+			</basic>
+			<basic name="released">
+				<column name="TRB_RELEASED"/>
+			</basic>
+			<basic name="rate">
+				<column name="TRB_RATE"/>
+			</basic>
+			<basic name="currencyId">
+				<column name="TRB_CURRENCYID"/>
+			</basic>
+			<basic name="glTransId">
+				<column name="TRB_GLTRANSID"/>
+			</basic>
+			<basic name="company">
+				<column name="TRB_COMPANY"/>
+			</basic>
+			<basic name="branch">
+				<column name="TRB_BRANCH"/>
+			</basic>
+			<basic name="releasedBy">
+				<column name="TRB_RELEASEDBY"/>
+			</basic>
+			<basic name="releaseDate">
+				<column name="TRB_RELEASEDATE"/>
+				<temporal>DATE</temporal>
+			</basic>
+			<one-to-many name="items" mapped-by="transaction" fetch="EAGER">
+				<cascade>
+					<cascade-persist />
+					<cascade-merge />
+					<cascade-remove />
+				</cascade>
+			</one-to-many>
+			<one-to-one name="coa">
+				<join-column name="COA_ID" referenced-column-name="COA_ID"/>
+			</one-to-one>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.gl.model.BankTransItem">
+		<table name="ACC_BANKTRANSITEM">
+		</table>
+		<attributes>
+			<id name="id">
+				<column name="TBI_ID"/>
+				<generated-value strategy="TABLE" generator="gen_acc_banktransitem"/>
+				<table-generator name="gen_acc_banktransitem" pk-column-value="gen_acc_banktransitem" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="description">
+				<column name="TBI_DESCRIPTION" length="400"/>
+			</basic>
+			<basic name="value">
+				<column name="TBI_VALUE"/>
+			</basic>
+			<many-to-one name="transaction">
+				<join-column name="TRB_ID" referenced-column-name="TRB_ID"/>
+			</many-to-one>
+			<one-to-one name="coa">
+				<join-column name="COA_ID" referenced-column-name="COA_ID"/>
+			</one-to-one>
+		</attributes>
+	</entity>
+</entity-mappings>

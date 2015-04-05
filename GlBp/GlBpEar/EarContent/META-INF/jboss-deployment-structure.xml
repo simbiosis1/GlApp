@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure>
+   <deployment>
+      <dependencies>
+        <module name="org.hibernate" slot="main" >
+            <imports>
+                <include path="META-INF/**"/>
+                <include path="**"/>
+            </imports>
+        </module>
+        <module name="org.joda.time" slot="main" >
+            <imports>
+                <include path="META-INF/**"/>
+                <include path="**"/>
+            </imports>
+        </module>
+      </dependencies>
+   </deployment>
+</jboss-deployment-structure>

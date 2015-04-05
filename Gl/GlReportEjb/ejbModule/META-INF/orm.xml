@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.0" xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd">
+	<persistence-unit-metadata>
+		<persistence-unit-defaults>
+			<access>FIELD</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+		<entity class="org.simbiosis.gl.model.FinancialStartRpt">
+		<table name="RPT_FINANCIALSTART">
+		</table>
+		<named-query name="deleteGLTransStart">
+			<query>delete from FinancialStartRpt x where x.company=:company and x.month=:month and x.year=:year</query>
+		</named-query>
+		<named-query name="listGLTransStart1">
+			<query>select x from FinancialStartRpt x where x.company=:company and x.month=:month and x.year=:year order by x.coaCode</query>
+		</named-query>
+		<named-query name="listGLTransStart2">
+			<query>select x from FinancialStartRpt x where x.company=:company and x.branch=:branch and x.month=:month and x.year=:year order by x.coaCode</query>
+		</named-query>
+		<named-query name="getGLTransStart">
+			<query>select x from FinancialStartRpt x where x.company=:company and x.branch=:branch and x.month=:month and x.year=:year and x.coa=:coa</query>
+		</named-query>
+		<attributes>
+			<id name="id">
+				<column name="FSR_ID"/>
+				<generated-value strategy="TABLE" generator="gen_financialstart"/>
+				<table-generator name="gen_financialstart" pk-column-value="gen_financialstart" allocation-size="1">
+				</table-generator>
+			</id>
+			<basic name="month">
+				<column name="FSR_MONTH"/>
+			</basic>
+			<basic name="year">
+				<column name="FSR_YEAR"/>
+			</basic>
+			<basic name="company">
+				<column name="FSR_COMPANY"/>
+			</basic>
+			<basic name="branch">
+				<column name="FSR_BRANCH"/>
+			</basic>
+			<basic name="value">
+				<column name="FSR_VALUE"/>
+			</basic>
+			<basic name="group">
+				<column name="FSR_GROUP"/>
+			</basic>
+			<basic name="coa">
+				<column name="FSR_COA"/>
+			</basic>
+			<basic name="coaCode">
+				<column name="FSR_COACODE" length="30"/>
+			</basic>
+			<basic name="coaDescription">
+				<column length="100" name="FSR_COADESCRIPTION"/>
+			</basic>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.gl.model.FinancialRpt">
+		<table name="RPT_FINANCIAL">
+		</table>
+		<named-query name="getFinancialRpt">
+			<query>select x from FinancialRpt x where x.id.company=:company and x.id.branch=:branch and x.id.date=:date and x.id.coa=:coa</query>
+		</named-query>
+		<named-query name="listFinancialRpt">
+			<query>select x from FinancialRpt x where x.id.company=:company and x.id.branch=:branch and x.id.date=:date order by x.group, x.coaCode</query>
+		</named-query>
+		<named-query name="deleteFinancialRpt">
+			<query>delete from FinancialRpt x where x.id.company=:company and x.id.date=:date</query>
+		</named-query>
+		<attributes>
+			<embedded-id name="id">
+			</embedded-id>
+			<basic name="group">
+				<column name="FRP_GROUP"/>
+			</basic>
+			<basic name="factor">
+				<column name="FRP_FACTOR"/>
+			</basic>
+			<basic name="startValue">
+				<column name="FRP_STARTVALUE"/>
+			</basic>
+			<basic name="currentValue">
+				<column name="FRP_CURRENTVALUE"/>
+			</basic>
+			<basic name="endValue">
+				<column name="FRP_ENDVALUE"/>
+			</basic>
+			<basic name="debit">
+				<column name="FRP_DEBIT"/>
+			</basic>
+			<basic name="credit">
+				<column name="FRP_CREDIT"/>
+			</basic>
+			<basic name="coaCode">
+				<column name="FRP_COACODE" length="30"/>
+			</basic>
+			<basic name="coaDescription">
+				<column name="FRP_COADESCRIPTION" length="100"/>
+			</basic>
+			<basic name="coaParent">
+				<column name="FRP_COAPARENT"/>
+			</basic>
+			<basic name="coaParentCode">
+				<column name="FRP_COAPARENTCODE" length="30"/>
+			</basic>
+			<basic name="coaParentDescription">
+				<column name="FRP_COAPARENTDESCRIPTION" length="100"/>
+			</basic>
+			<basic name="coaGrandParent">
+				<column name="FRP_COAGRANDPARENT"/>
+			</basic>
+			<basic name="coaGrandParentCode">
+				<column name="FRP_COAGRANDPARENTCODE" length="30"/>
+			</basic>
+			<basic name="coaGrandParentDescription">
+				<column name="FRP_COAGRANDPARENTDESCRIPTION" length="100"/>
+			</basic>
+		</attributes>
+	</entity>
+	<entity class="org.simbiosis.gl.model.PublicFinancialRpt">
+		<table name="RPT_PUBLICFINANCIAL">
+		</table>
+		<named-query name="listPublicFinancialRpt">
+			<query>select x from PublicFinancialRpt x where x.id.company=:company and x.id.branch=:branch and x.id.date=:date and x.id.group=:group</query>
+		</named-query>
+		<named-query name="deletePublicFinancialRpt">
+			<query>delete from PublicFinancialRpt x where x.id.company=:company and x.id.date=:date</query>
+		</named-query>
+		<attributes>
+			<embedded-id name="id">
+			</embedded-id>
+			<basic name="description">
+				<column name="PFR_DESCRIPTION" length="200"/>
+			</basic>
+			<basic name="value">
+				<column name="PFR_VALUE"/>
+			</basic>
+		</attributes>
+	</entity>
+	<embeddable class="org.simbiosis.gl.model.FinancialRptPK">
+		<attributes>
+			<basic name="date">
+				<column name="FRP_DATE"/>
+			</basic>
+			<basic name="coa">
+				<column name="FRP_COA"/>
+			</basic>
+			<basic name="company">
+				<column name="FRP_COMPANY"/>
+			</basic>
+			<basic name="branch">
+				<column name="FRP_BRANCH"/>
+			</basic>
+		</attributes>
+	</embeddable>
+	<embeddable class="org.simbiosis.gl.model.PublicFinancialRptPK">
+		<attributes>
+			<basic name="date">
+				<column name="PFR_DATE"/>
+				<temporal>DATE</temporal>
+			</basic>
+			<basic name="code">
+				<column name="PFR_CODE" length="30"/>
+			</basic>
+			<basic name="company">
+				<column name="PFR_COMPANY"/>
+			</basic>
+			<basic name="branch">
+				<column name="PFR_BRANCH"/>
+			</basic>
+			<basic name="group">
+				<column name="PFR_GROUP"/>
+			</basic>
+		</attributes>
+	</embeddable>
+</entity-mappings>

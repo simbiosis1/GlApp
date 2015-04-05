@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><entities>
+	<entity>
+		<entity-name>org.simbiosis.gl.model.FinancialStartRpt</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>268</entity-height>
+		<entity-X-Coordinate>742</entity-X-Coordinate>
+		<entity-Y-Coordinate>34</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>org.simbiosis.gl.model.PublicFinancialRptPK</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>130</entity-height>
+		<entity-X-Coordinate>394</entity-X-Coordinate>
+		<entity-Y-Coordinate>34</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>org.simbiosis.gl.model.FinancialRptPK</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>130</entity-height>
+		<entity-X-Coordinate>36</entity-X-Coordinate>
+		<entity-Y-Coordinate>31</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>org.simbiosis.gl.model.FinancialRpt</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>388</entity-height>
+		<entity-X-Coordinate>184</entity-X-Coordinate>
+		<entity-Y-Coordinate>35</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>org.simbiosis.gl.model.PublicFinancialRpt</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>148</entity-height>
+		<entity-X-Coordinate>540</entity-X-Coordinate>
+		<entity-Y-Coordinate>32</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+</entities>

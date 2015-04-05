@@ -1,0 +1,21 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:v="urn:import:org.simbiosis.ui.gl.admin.client.editor"
+	>
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<div class="formLabel">Laba rugi tahun berjalan</div>
+		<div><v:CoaListEditor  ui:field="clr" styleName="formCombobox"/></div>
+		<div class="formLabel">Laba rugi tahun lalu</div>
+		<div><v:CoaListEditor  ui:field="llr" styleName="formCombobox"/></div>
+		<div class="formLabel">Taksiran cadangan</div>
+		<div><v:CoaListEditor  ui:field="reserve" styleName="formCombobox" /></div>
+		<div class="formLabel">Taksiran pajak</div>
+		<div><v:CoaListEditor  ui:field="tax" styleName="formCombobox" /></div>
+		<div class="formLabel">Taksiran zakat</div>
+		<div><v:CoaListEditor  ui:field="zakat" styleName="formCombobox" /></div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

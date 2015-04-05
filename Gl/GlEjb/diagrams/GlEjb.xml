@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><entities>
+	<entity>
+		<entity-name>org.simbiosis.gl.model.BankTrans</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>426</entity-height>
+		<entity-X-Coordinate>347</entity-X-Coordinate>
+		<entity-Y-Coordinate>670</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>org.simbiosis.gl.model.CashTrans</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>426</entity-height>
+		<entity-X-Coordinate>551</entity-X-Coordinate>
+		<entity-Y-Coordinate>231</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>org.simbiosis.gl.model.GlTransItem</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>226</entity-height>
+		<entity-X-Coordinate>708</entity-X-Coordinate>
+		<entity-Y-Coordinate>54</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>org.simbiosis.gl.model.GlTrans</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>446</entity-height>
+		<entity-X-Coordinate>953</entity-X-Coordinate>
+		<entity-Y-Coordinate>48</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>org.simbiosis.gl.model.Coa</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>326</entity-height>
+		<entity-X-Coordinate>230</entity-X-Coordinate>
+		<entity-Y-Coordinate>50</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>org.simbiosis.gl.model.CoaGroup</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>168</entity-height>
+		<entity-X-Coordinate>50</entity-X-Coordinate>
+		<entity-Y-Coordinate>50</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>org.simbiosis.gl.model.CashTransItem</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>186</entity-height>
+		<entity-X-Coordinate>390</entity-X-Coordinate>
+		<entity-Y-Coordinate>420</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>org.simbiosis.gl.model.BankTransItem</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>186</entity-height>
+		<entity-X-Coordinate>176</entity-X-Coordinate>
+		<entity-Y-Coordinate>720</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>org.simbiosis.gl.model.FinancialRef</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>208</entity-height>
+		<entity-X-Coordinate>953</entity-X-Coordinate>
+		<entity-Y-Coordinate>547</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>org.simbiosis.gl.model.FinancialConvert</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>186</entity-height>
+		<entity-X-Coordinate>89</entity-X-Coordinate>
+		<entity-Y-Coordinate>420</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+</entities>
